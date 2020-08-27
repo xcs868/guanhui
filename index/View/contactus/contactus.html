@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <title>上海冠晖供应链管理有限公司--关于冠晖</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./Resources/lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/publictop.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/customer.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/home.css" />
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+
+    .anchorBL {
+        display: none;
+    }
+
+    th {
+        text-align: center;
+    }
+    .table{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .table caption{
+        border: 1px solid #ddd;
+        border-bottom: none;
+        text-align: center;
+        box-sizing: border-box;
+        color: #000;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .table thead tr th{
+        border-bottom: none;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .table tbody tr td{
+        font-size: 16px;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <?php   include './View/index/top.html'  ?>
+        <div class="row">
+            <section class="col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
+                <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 intro_all">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="about_left" style="background: #f9f9f9;">
+                            <p>联系我们</p>
+                            <ul>
+                                <li class="addactive" id="map" onclick="showhide('map')">总部地址 </li>
+                                <li id="name" onclick="showhide('name')">各片区联系人</li>
+                                <li id="my" onclick="showhide('my')">人才招聘</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 about_padding">
+                        <!--地图-->
+                        <div class="about_backpack" id="about_introduc">
+                            <p>您现在所在的位置: 联系我们 > 总部地址 </p>
+                            <div class="backpack_div mt50">
+                                <!-- <p class="backpack_divhead">百度地图</p> -->
+                                <div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 backpack_footimg">
+                                        <div id="container" style="height: 500px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--名片区联系人-->
+                        <div class="about_backpack dpnone" id="about_culture">
+                            <p>您现在所在的位置: 联系我们 > 各片区联系人</p>
+                            <div class="backpack_div mt50">
+                                <!-- <p class="backpack_divhead">名片区联系人</p> -->
+                                <div>
+                                    <!-- <p class="backpackbg_head firstP">一、蒙牛</p> -->
+                                    <p class="backpack_text" style="padding-top: 0px;">
+                                    </p>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 backpack_footimg" style="padding-top: 0px;">
+                                        <!-- <img src="./Resources/img/contactus/Company profile.png" alt=""> -->
+                                        <table class="table table-bordered">
+                                            <caption>各片区业务网点联系电话及地址</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th>区域</th>
+                                                    <th>办事处</th>
+                                                    <th>办事处邮箱</th>
+                                                    <th>座机</th>
+                                                    <th>地址</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td rowspan="2">东北</td>
+                                                    <td>长春</td>
+                                                    <td>jdzgw2010cc@126.com</td>
+                                                    <td>0431-81864285</td>
+                                                    <td>吉林省长春市绿园区普阳街1688号长融大厦C座10楼1005室</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>内蒙</td>
+                                                    <td>jdzgw2010nm@126.com  </td>
+                                                    <td>0471-3465705</td>
+                                                    <td>内蒙古呼和浩特赛罕区沙良物流园9栋A1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="8">华北</td>
+                                                    <td>北京</td>
+                                                    <td>jdzgw2010bj@126.com</td>
+                                                    <td>010-69444280</td>
+                                                    <td>北京市平谷区马坊镇平谷地方铁路局广伟物流办公室</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>天津</td>
+                                                    <td>jdzgw2010tj@126.com</td>                                             
+                                                    <td>022-65614927</td>
+                                                    <td>天津市塘沽区滨海新区西区 港城大道北环铁路桥南  北塘西货场</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>保定</td>
+                                                    <td>jdzgw2012bd@126.com  </td>
+                                                    <td>0312-8114196</td>
+                                                    <td>河北省保定市清苑区清苑物流园广伟物流保定办事处</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>徐水</td>
+                                                    <td>1196469895@qq.com</td>
+                                                    <td>0312-8661302</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>沧州</td>
+                                                    <td>jdzgw2010cz@126.com</td>
+                                                    <td></td>
+                                                    <td>河北省沧州市新华区维康路维康家园4号楼四单元102</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>济南</td>
+                                                    <td>jdzgw2011jn@126.com</td>
+                                                    <td>0534-2152088</td>
+                                                    <td>山东省德州市齐河县晏城镇金能大道北首济铁齐河物流园4楼401室</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>菏泽</td>
+                                                    <td>2137383552@qq.com</td>
+                                                    <td>13869762979</td>
+                                                    <td>山东省菏泽市牡丹区皇镇乡济铁物流园广伟办公室</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>郑州</td>
+                                                    <td>jdzgw2017zz@126.com</td>
+                                                    <td></td>
+                                                    <td>郑州市上街区新安西路与灵宝路交叉口（一汽大众分拨中心）</td>
+                                                </tr>                                               
+                                                <tr>
+                                                    <td rowspan="4">西南</td>
+                                                    <td>成都</td>
+                                                    <td>jdzgw2010cd@126.com</td>
+                                                    <td>028-64559657</td>
+                                                    <td>成都市双流县新兴镇铁路货场（广伟办公室）</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>昆明</td>
+                                                    <td>jdzgw2016km@126.com</td>
+                                                    <td>0871-68781807</td>
+                                                    <td>云南省昆明市经开区王家营中铁特货昆明商品车物流基地</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>0871-68783909</td>
+                                                    <td>云南省昆明市安宁市金方街道昆钢悠然小区(一汽大众昆明分拨中心)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>贵阳</td>
+                                                    <td>jdzgw2010gy@126.com</td>
+                                                    <td></td>
+                                                    <td>贵州省贵阳市花溪区孟关镇改貌小区安置房B16栋2-1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="6">华南</td>
+                                                    <td>广州</td>
+                                                    <td>jdzgw2016gz@126.com</td>
+                                                    <td>020-36388211</td>
+                                                    <td>广东省广州市花都区雅瑶镇雅源南路113号</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>长沙</td>
+                                                    <td>jdzgw2010hn@126.com</td>
+                                                    <td></td>
+                                                    <td>湖南省长沙市开福区青竹湖安顺路恩瑞物流北门商品车分拨中心</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>株洲</td>
+                                                    <td>jdzgw2015zz@126.com</td>
+                                                    <td>0731-28832098</td>
+                                                    <td>湖南省株洲市石峰区铜霞路口铁路货场办公楼内</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>湘潭</td>
+                                                    <td>3153809694@qq.com</td>
+                                                    <td>0731-52779366</td>
+                                                    <td>湖南省湘潭市岳塘区板塘铺货运东站</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>柳州</td>
+                                                    <td>jdzgw2016lz@126.com</td>
+                                                    <td></td>
+                                                    <td>广西柳州市柳南区石烂路机保段路口</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>南宁</td>
+                                                    <td>547270499@qq.com</td>
+                                                    <td></td>
+                                                    <td>南宁市江南区新站路20号西馨苑40栋1-1号室</td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="14">华东</td>
+                                                    <td>南京</td>
+                                                    <td>nanjing@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>南京市栖霞区玄武大道徐庄软件园新干线物流基地</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>上海</td>
+                                                    <td>shanghai@jdzgwwl.com</td>
+                                                    <td>021-51232324</td>
+                                                    <td>上海市闵行区剑川路2288号闵行铁路货场中铁特货闵行营业部</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>福州</td>
+                                                    <td>fuzhou@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>福建省福州市晋安区鼓山镇拥上路横屿鳝溪佳园1栋206室</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>福建省福清市江阴镇铁路物流园</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>厦门</td>
+                                                    <td>xiamen@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>福建省厦门市海沧区东孚镇厦门国际物流港中铁特货厦门物流基地</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>江山</td>
+                                                    <td>jiangshan@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>浙江省衢州市江山市虎山街道上铺铁路货场</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>宁波</td>
+                                                    <td>ningbo@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>浙江省宁波市江北区邵余村申明亭路铁路货运北站</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>杭州</td>
+                                                    <td>hangzhou@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>杭州市拱墅区沈半路448号大庆加油站对面杭州北永宁货场</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>金华</td>
+                                                    <td>jinhua@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>金华市婺城区竹马馆西宅寸灯路16号</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>合肥</td>
+                                                    <td>hefei@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>安徽省合肥市肥西县青龙潭路滨河家园2栋1701</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>南昌</td>
+                                                    <td>nanchang@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>江西省南昌市南昌县向塘镇向塘经济开发区丽湖中大道铁路物流基地</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>武汉</td>
+                                                    <td>wuhan@jdzgwwl.com</td>
+                                                    <td>027-84749107</td>
+                                                    <td>武汉市经济技术开发区沌口万家湖B区红江小区211号</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>盐城</td>
+                                                    <td>yancheng@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>江苏省盐城市城南新区伍佑镇伍东村汽车铁路物流基地</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>芜湖</td>
+                                                    <td>wuhu@jdzgwwl.com</td>
+                                                    <td></td>
+                                                    <td>安徽省芜湖市镜湖区天门山东路铁路西货场内</td>
+                                                </tr>
+                                                <tr>
+                                                    <td rowspan="4">西北</td>
+                                                    <td>西安</td>
+                                                    <td>1821097079@qq.com</td>
+                                                    <td></td>
+                                                    <td>陕西省西安市临潼区新丰镇床单厂广伟物流</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>兰州</td>
+                                                    <td>380721566@qq.com</td>
+                                                    <td></td>
+                                                    <td>甘肃省兰州市西固区临洮街四十家园8--1601</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>乌鲁木齐</td>
+                                                    <td>191977952@qq.com</td>
+                                                    <td></td>
+                                                    <td>新疆乌鲁木齐市新市区迎宾路汽车队小区7-3-601</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>银川</td>
+                                                    <td>1009300781@qq.com</td>
+                                                    <td>0951-5966306</td>
+                                                    <td>宁夏银川市西夏区燕宝钢材市场B座128号</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--人才招聘-->
+                        <div class="about_backpack dpnone" id="about_branch">
+                            <p>您现在所在的位置: 联系我们 > 人才招聘</p>
+                            <div class="backpack_div mt50">
+                                <!-- <p class="backpack_divhead">人才招聘</p> -->
+                                <div class="col-md-12 col-sm-12 col-xs-12 backpack_footimg">
+                                    <div>
+                                        <p class="backpackbg_head firstP">一、职位</p>
+                                        <p class="backpack_text" style="padding-top: 0px;">【 冷链销售经理 】</p>
+                                    </div>
+                                    <div class="pt45">
+                                        <p class="backpackbg_head firstP">二、岗位职责</p>
+                                        <p class="backpack_text" style="padding-top: 0px;">
+                                            1、负责市场业务拓展与开发，制定业务开发计划及具体的实施方案；</br>
+                                            2、负责进行业务开发与挖掘，牵头完成包括提交立项、解决方案、报价、投标、谈判、合同、试运等工作；</br>
+                                            3、负责了解掌握客户业务运行状况，牵头完成所属客户的商务事项（包括客户关系维护、业务洽谈、应收款催收、理赔等）；</br>
+                                            4、协调解决客户与公司内部运行管理方面出现的各种问题，建立长期、良好、稳固的客户关系，以提高客户满意度；</br>
+                                            5、负责市场信息的收集及竞争对手的分析；</br>
+                                        </p>
+                                    </div>
+                                    <div class="pt45">
+                                        <p class="backpackbg_head firstP">三、任职要求</p>
+                                        <p class="backpack_text" style="padding-top: 0px;">
+                                            1、大学专科及以上，3年及以上大客户销售经验，有冷链B2B业务拓展经验、有速冻食品、餐饮、乳制品、肉类、物流等行业大客户</br>销售经验、具有良好的行业资源和客户资源者优先；</br>
+                                            2、有生鲜冷链产地客户资源、上海/成都周边城市冷链物流大客户资源；</br>
+                                            3、熟悉大客户销售流程和谈判技巧，具有较强的组织、沟通、协调能力；</br>
+                                            4、有一定抗压和创新能力，能够快速适应岗位且有较强推动和拿结果的能力；</br>
+                                            5、对物流行业（冷链）动态有一定敏感度；</br>
+                                            6、能适应跨省出差；</br>
+                                        </p>
+                                    </div>
+                                    <div class="pt45">
+                                        <p class="backpackbg_head firstP">四、薪资</p>
+                                        <p class="backpack_text" style="padding-top: 0px;">
+                                            薪资面议（10-15w/年）</br>
+                                            电话：021-52660210
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php   include './View/index/footer.html'  ?>
+            </section>
+        </div>
+    </div>
+</body>
+<script src="./Resources/lib/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/lib/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/lib/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/js/home.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=mwoeSFYshgc4qzb7j0vUgEoAKvXhE7LZ"></script>
+<script src="./Resources/js/contactus.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

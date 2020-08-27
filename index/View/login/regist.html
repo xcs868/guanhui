@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>冠辉-登陆</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./Resources/lib/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/login.css" />
+    <script src="./Resources/js/vue.js/vue.js"></script>
+    <script src="./Resources/js/vue.js/vue-resource.js"></script>
+    <script src="./Resources/js/jquery.min.js"></script>
+    <script src="./Resources/js/login.js"></script>
+    <script
+      src="./Resources/lib/jquery-3.3.1.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div class="container-fluid" id="longin_bg">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-12 col-xs-12 col-sm-12" id="login_list_regist">
+          <div class="col-md-3 col-xs-6 col-xs-6 col-sm-6" id="login_info">
+            <div class="login_img">
+              <p class="login_p">冠晖供应链</p>
+            </div>
+            <div class="login_delv">
+              <ul class="first" id="nav">
+                <li style="color: #1086fd;">
+                  <a href="./index.php?c=login&m=index" class="font_dl">登录</a>
+                </li>
+                <li>
+                  <a href="./index.php?c=login&m=regist" class="font_zc"
+                    >注册</a
+                  >
+                </li>
+              </ul>
+              <div>
+                <ul class="second">
+                  <li id="growTask">
+                    <p>
+                      <span>+86&nbsp;</span>
+                      <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        class="home_inputt"
+                        v-model="from.phone"
+                        placeholder="请输入手机号"
+                        style="height: 3rem;"
+                        @change="changePhone"
+                        @keyup.enter="handleregist"
+                      /><br />
+                    </p>
+                    <p style="border: none; height: 20px; color: red;">
+                      {{errmsg}}
+                    </p>
+                    <p>
+                      <input
+                        class="home_inputt"
+                        id="username"
+                        name="username"
+                        type="text"
+                        v-model="from.username"
+                        @change="changeName"
+                        @keyup.enter="handleregist"
+                        placeholder="请输入用户名"
+                        style="height: 3rem;"
+                      />
+                    </p>
+                    <p style="border: none; height: 20px; color: red;">
+                      {{erradmin}}
+                    </p>
+                    <p>
+                      <input
+                        class="home_inputt"
+                        id="password"
+                        name="password"
+                        type="password"
+                        @change="changePass"
+                        @keyup.enter="handleregist"
+                        placeholder="请输入密码"
+                        v-model="from.password"
+                        style="height: 3rem;"
+                      />
+                    </p>
+                    <p style="border: none; height: 20px; color: red;">
+                      {{erroldpass}}
+                    </p>
+                    <p>
+                      <input
+                        class="home_inputt"
+                        id="repass"
+                        name="repass"
+                        type="password"
+                        placeholder="请确认密码"
+                        @change="changeNews"
+                        @keyup.enter="handleregist"
+                        style="height: 3rem;"
+                        v-model="from.newpassword"
+                      />
+                    </p>
+                    <p style="border: none; height: 20px; color: red;">
+                      {{errnewpass}}
+                    </p>
+                    <p style="margin-top: 9px; border: 0px;">
+                      <button
+                        id="input_zc"
+                        style="
+                          width: 100%;
+                          height: 40px;
+                          line-height: 40px;
+                          color: #fff;
+                          background: #ccc;
+                          text-align: center;
+                          border: 0px solid;
+                          outline: none;
+                          border-radius: 8px;
+                        "
+                        @click="registData"
+                      >
+                        注册
+                      </button>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var url = window.location.href;
+    if ((url = "./index.php?c=login&m=regist")) {
+      $(".font_zc").css({ color: "#1086fd" });
+      $(".font_dl").css({ color: "#ccc" });
+    }
+    $("input").bind("input propertychange", function () {
+      if ($(".home_input").val() != "") {
+        $("#input_zc").css({ background: "#3990FC", color: "white" });
+      } else {
+        $("#input_zc").css({
+          background: "rgb(204, 204, 204)",
+          color: "white",
+        });
+      }
+    });
+    $("input").bind("input propertychange", function () {
+      if ($(".home_inputt").val() != "") {
+        $("#input_zc").css({ background: "#3990FC", color: "white" });
+      } else {
+        $("#input_zc").css({
+          background: "rgb(204, 204, 204)",
+          color: "white",
+        });
+      }
+    });
+    var login_list_regist = new Vue({
+      el: "#login_list_regist",
+      data: {
+        from: {
+          phone: "",
+          username: "",
+          newpassword: "",
+          password: "",
+        },
+        errmsg: "",
+        erradmin: "",
+        erroldpass: "",
+        errnewpass: "",
+      },
+      methods: {
+        changePhone() {
+          if (/^1[3456789]\d{9}$/.test(this.from.phone)) {
+            this.errmsg = "";
+          }
+          if (!/^1[3456789]\d{9}$/.test(this.from.phone)) {
+            this.errmsg = "请输入正确的手机号";
+          }
+        },
+
+        changeName() {
+          if (/^[\u4e00-\u9fa5a-zA-Z0-9]{3,10}$/.test(this.from.username)) {
+            this.erradmin = "";
+          }
+          if (!/^[\u4e00-\u9fa5a-zA-Z0-9]{1,5}$/.test(this.from.username)) {
+            this.erradmin = "用户名不能出现特殊字符,长度为1-5";
+          }
+        },
+        changeNews() {
+          if (/^[\w_-]{6,15}$/.test(this.from.newpassword)) {
+            this.errnewpass = "";
+          }
+          if (!/^[\w]{6,15}$/.test(this.from.newpassword)) {
+            this.errnewpass = "6至15位数的密码，由数字或英文组成";
+          }
+        },
+        changePass() {
+          if (/^[\w_-]{6,15}$/.test(this.from.password)) {
+            this.erroldpass = "";
+          }
+          if (!/^[\w]{6,15}$/.test(this.from.password)) {
+            this.erroldpass = "6至15位数的密码，由数字或英文组成";
+          }
+        },
+
+        renderRegis() {
+          var phone = /^1[3456789]\d{9}$/.test(this.from.phone);
+          var username = /^[\u4e00-\u9fa5a-zA-Z0-9]{1,5}$/.test(
+            this.from.username
+          );
+          var old = /^[\w_-]{6,15}$/.test(this.from.newpassword);
+          var news = /^[\w_-]{6,15}$/.test(this.from.password);
+          if (phone) {
+            if (username) {
+              if (old) {
+                if (news) {
+                  if (this.from.newpassword === this.from.password) {
+                    this.$http
+                      .post(
+                        "./index.php?c=login&m=doRegist",
+                        {
+                          username: this.from.username,
+                          password: this.from.password,
+                          phone: this.from.phone,
+                          repass: this.from.newpassword,
+                        },
+                        { emulateJSON: true }
+                      )
+                      .then(function (res) {
+                        var code = res.body["code"];
+                        alert(res.body["mess"]);
+                        if (code === 200) {
+                          window.location.href = "./index.php?c=login";
+                        } else {
+                          window.location.href = "./index.php?c=login&m=regist";
+                        }
+                      });
+                  } else {
+                    this.errnewpass = "前后两次密码不一致";
+                  }
+                } else {
+                  this.errnewpass = "6至15位数的密码，由数字或英文组成";
+                }
+              } else {
+                this.erroldpass = "6至15位数的密码，由数字或英文组成";
+              }
+            } else {
+              this.erradmin = "用户名不能出现特殊字符,长度为1-5";
+            }
+          } else {
+            this.errmsg = "请输入正确的手机号";
+          }
+        },
+
+        registData() {
+          this.renderRegis();
+        },
+        handleregist() {
+          this.renderRegis();
+        },
+      },
+    });
+  </script>
+</html>

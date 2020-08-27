@@ -1,0 +1,218 @@
+<?php  include './View/index/import.html' ?>
+<style>
+    .layui-input-block{
+        margin-left: 80px;
+        width: 400px;
+        overflow-y: auto;
+    }
+    /*input[type=file] {*/
+    /*    display: none;*/
+    /*}*/
+    .el-button--primary {
+        color: #FFF;
+        background-color: #009688;
+        border-color: #009688;
+    }
+    .el-button--primary:focus, .el-button--primary:hover {
+        background: #5EBCB3;
+        border-color: #5EBCB3;
+        color: #FFF;
+    }
+</style>
+<div class="x-body">
+    <form class="news_list_add" id="news_list_add">
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>标题
+            </label>
+            <div class="layui-input-inline">
+                <input type="hidden" id="newsMid" name="newsMid" value="<?php echo $newsMid ?>">
+                <el-input v-model="form.news_mid" type="hidden"></el-input>
+                <el-input v-model="form.news_txt0" placeholder="请输入标题"></el-input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>类型
+            </label>
+            <div class="layui-input-inline">
+                <el-select v-model="form.news_int0" placeholder="请选择">
+                    <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                时间
+            </label>
+            <div class="layui-input-inline">
+                <el-date-picker
+                        v-model="form.news_dat0"
+                        type="date"
+                        placeholder="选择日期"
+                        format="yyyy 年 MM 月 dd 日"
+                        value-format="yyyy-MM-dd">
+                </el-date-picker>
+            </div>
+        </div>
+
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">-->
+<!--                图片-->
+<!--            </label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <el-upload-->
+<!--                        class="upload-demo"-->
+<!--                        action="./index.php?c=news&m=uploadImg"-->
+<!--                        :on-preview="handlePreview"-->
+<!--                        :on-remove="handleRemove"-->
+<!--                        :on-success="handleAvatarSuccess"-->
+<!--                        :file-list="form.fileList"-->
+<!--                        list-type="picture">-->
+<!--                    <el-button size="small" type="primary">点击上传</el-button>-->
+<!--                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+<!--                </el-upload>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="layui-form-item layui-form-text">-->
+<!--            <label class="layui-form-label">-->
+<!--                内容-->
+<!--            </label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <el-input-->
+<!--                        type="textarea"-->
+<!--                        :rows="2"-->
+<!--                        placeholder="请输入内容"-->
+<!--                        v-model="form.news_txt1">-->
+<!--                </el-input>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">
+                内容
+            </label>
+            <div class="layui-input-block">
+                <div class="summernote"></div>
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <label class="layui-form-label">
+            </label>
+            <el-button type="primary" size="small" @click="addData">保存</el-button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var newsListAdd = new Vue({
+        el: '#news_list_add',
+        data() {
+           return {
+               parentMessage: 'Parent',
+               summer: '',
+               items: [],
+               options: [{
+                   value: '',
+                   label: '请选择状态'
+               }, {
+                   value: '1',
+                   label: '行业新闻'
+               }, {
+                   value: '2',
+                   label: '企业动态'
+               }],
+               form:{
+                   news_mid: '',
+                   news_txt0: '',
+                   news_int0: '',
+                   news_dat0: '',
+                   news_txt1: '',
+                   fileList:[]
+               },
+           }
+
+        },
+        mounted:function(){
+            this.findData()
+        },
+        methods:{
+            findData(){
+                let newsMid = $('#newsMid').val();
+                let sendData = {news_mid:newsMid};
+                this.summer = $('.summernote').summernote({
+                    height: 200,
+                    tabsize: 2,
+                    lang: 'zh-CN',
+                    callbacks: {
+                        onImageUpload: function (files) {
+                            newsListAdd.sendFile(files);
+                        }
+                    }
+                });
+                if(newsMid != undefined){
+                    this.$http.post('./index.php?c=news&m=findData',sendData,{emulateJSON:true}).then(function(res){
+                        let data = res.body.data;
+                        this.form.news_mid  = data.news_mid;
+                        this.form.news_txt0 = data.news_txt0;
+                        this.form.news_int0 = data.news_int0;
+                        this.form.news_dat0 = data.news_dat0;
+                        this.form.news_txt1 = data.news_txt1;
+                        this.form.fileList  = data.fileList;
+                        this.summer.summernote('code', this.form.news_txt1);
+                    });
+                }
+            },
+            sendFile:function(files) {
+                let imageData = new FormData();
+                imageData.append("imageData", files[0]);
+                this.$http.post('./index.php?c=news&m=uploadImg',imageData,{emulateJSON:true}).then(function(res){
+                    let imgNode = document.createElement("img");
+                    imgNode.src = '..' + res.data.img;
+                    this.summer.summernote('insertNode', imgNode);
+                });
+            },
+            // handleAvatarSuccess (res, file) {
+            //     if (res.code === 200) {
+            //         let url =  '..'+res.data.url;
+            //         this.form.fileList.push({name: res.data.name, url: url, uid: res.data.uid})
+            //         console.info(this.form.fileList);
+            //     } else {
+            //         this.$message.error(res.msg)
+            //     }
+            // },
+            // handleRemove(file, fileList) {
+            //     for (var i in this.form.fileList) {
+            //         for (var k in this.form.fileList[i]) {
+            //             if (this.form.fileList[i][k] == file.uid) {
+            //                 delete this.form.fileList[i];
+            //                 break;
+            //             }
+            //         }
+            //     }
+            // },
+            // handlePreview(file) {
+            //     console.log(file);
+            // },
+            addData:function () {
+                this.form.news_txt1 = $(".summernote").summernote("code");
+                this.$http.post('./index.php?c=news&m=doAdd',this.form,{emulateJSON:true}).then(function(res){
+                    var row =  res.body.code;  // 此处是查询的页码
+
+                    alert(res.body.mess);
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                    parent.news_list_home.searchData(1);
+                });
+            }
+
+
+        }
+    });
+</script>

@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="./Resources/css/x-admin.css" media="all">
+<script src="./Resources/js/vue.js/vue.js"></script>
+<script src="./Resources/js/vue.js/vue-resource.js"></script>
+<script src="./Resources/js/jquery.min.js"></script>
+<script src="./Resources/js/bootstrap.min.js"></script>
+<script src="./Resources/lib/layui/layui.js" charset="utf-8"></script>
+<script src="./Resources/js/x-layui.js" charset="utf-8"></script>
+
+<div class="x-body">
+    <form class="user_list_edit" id="user_list_edit">
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>登录名  <?php $res['per_vch0'] ?>
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="username" name="username" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为您唯一的登入名
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为您唯一的登入名 <?php $res['per_vch0'] ?>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>邮箱
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="email" required="" lay-verify="email"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="role" class="layui-form-label">
+                <span class="x-red">*</span>角色
+            </label>
+            <div class="layui-input-inline">
+                <select name="role">
+                    <option value="">请选择角色</option>
+                    <option value="超级管理员">超级管理员</option>
+                    <option value="编辑人员">编辑人员</option>
+                    <option value="问题维护">问题维护</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_pass" class="layui-form-label">
+                <span class="x-red">*</span>密码
+            </label>
+            <div class="layui-input-inline">
+                <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                6到16个字符
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+                <span class="x-red">*</span>确认密码
+            </label>
+            <div class="layui-input-inline">
+                <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" onclick="user_list_add.addData();">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <button  class="layui-btn" lay-filter="add" lay-submit="">
+                增加
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    user_list_edit = new Vue({
+        el: '#user_list_edit',
+        data: {
+            parentMessage: 'Parent',
+            items: [],
+
+        },
+
+        methods:{
+
+            editData:function () {
+                var from_tb = $('form').serializeArray();
+                this.$http.post('./index.php?c=user&m=doAdd',from_tb,{emulateJSON:true}).then(function(res){
+                    var row =  res.body.code;  // 此处是查询的页码
+
+                    alert(res.body.mess);
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+
+                });
+            }
+
+
+        }
+    });
+
+
+</script>

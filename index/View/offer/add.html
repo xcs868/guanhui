@@ -1,0 +1,240 @@
+<div class="col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 20px;">
+  <form class="offer_list_add" id="offer_list_add">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <p class="offer_p">
+        <span>出发点︰</span>
+        <input
+          type="text"
+          id="start"
+          name="start"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+          v-model="from.goHome"
+          @change="gohome"
+        />
+        <span style="color: red;">{{errmsghome}}</span>
+      </p>
+      <p class="offer_p" style="margin-top: 20px;">
+        <span>目的地︰</span>
+        <input
+          type="text"
+          id="end"
+          name="end"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+          v-model="from.destination"
+          @change="destination"
+        />
+        <span style="color: red;">{{errdestination}}</span>
+      </p>
+      <p class="offer_p" style="margin-top: 20px;">
+        <span>名&emsp;称︰</span>
+        <input
+          type="text"
+          id="nickname"
+          name="nickname"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+          v-model="from.name"
+          @change="name"
+        />
+        <span style="color: red;">{{errname}}</span>
+      </p>
+      <p class="offer_p" style="margin-top: 20px; position: relative;">
+        <span>重&emsp;量︰</span>
+        <input
+          type="text"
+          id="weight"
+          name="weight"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+          v-model="from.weight"
+          @change="weight"
+        />
+        <span
+          style="position: relative; color: rgb(153, 153, 153); left: -30px;"
+          >KG</span
+        >
+        <span style="color: red;">{{errweight}}</span>
+      </p>
+      <p class="offer_p" style="margin-top: 20px;">
+        <span>联系人︰</span>
+        <input
+          type="text"
+          id="contact"
+          name="contact"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+          v-model="from.isMe"
+          @change="isMe"
+        />
+        <span style="color: red;">{{errisMe}}</span>
+      </p>
+      <p class="offer_p" style="margin-top: 20px;">
+        <span>电&emsp;话︰</span>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+          v-model="from.phone"
+          @change="phone"
+        />
+        <span style="color: red;">{{errphone}}</span>
+        <?php  if (empty($_SESSION['admin'])): ?>
+        <input
+          type="hidden"
+          id="hidden"
+          value="hidden"
+          name="hidden"
+          required="required"
+          placeholder="必填"
+          style="padding-left: 10px; width: 35%;"
+        />
+        <?php endif ?>
+      </p>
+      <p class="offer_button" style="margin-left: 60px;">
+        <input value="提交" style="" readonly @click="addFrom" />
+      </p>
+    </div>
+  </form>
+</div>
+<script src="./Resources/js/vue.js/vue.js"></script>
+<script src="./Resources/js/vue.js/vue-resource.js"></script>
+<script>
+  new Vue({
+    el: "#offer_list_add",
+    data: {
+      from: {
+        goHome: "",
+        destination: "",
+        name: "",
+        weight: "",
+        isMe: "",
+        phone: "",
+      },
+      errmsghome: "",
+      errdestination: "",
+      errname: "",
+      errweight: "",
+      errisMe: "",
+      errphone: "",
+    },
+    methods: {
+      gohome() {
+        var str = this.from.goHome;
+        console.log(str);
+        if (str.trim() !== "") {
+          this.errmsghome = "";
+        } else {
+          this.errmsghome = "请输入出发点,不能为空";
+        }
+      },
+      destination() {
+        var str = this.from.destination;
+        if (str.trim() !== "") {
+          this.errdestination = "";
+        } else {
+          this.errdestination = "请输入目的地,不能为空";
+        }
+      },
+      name() {
+        var str = this.from.name;
+        if (str.trim() !== "") {
+          this.errname = "";
+        } else {
+          this.errname = "请输入名称,不能为空";
+        }
+      },
+      weight() {
+        var str = this.from.weight;
+        console.log(str);
+        if (str.trim() !== "") {
+          this.errweight = "";
+        } else {
+          this.errweight = "请输入重量,不能为空";
+        }
+      },
+      isMe() {
+        var str = this.from.isMe;
+        if (str.trim() !== "") {
+          this.errisMe = "";
+        } else {
+          this.errisMe = "请输入联系人,不能为空";
+        }
+      },
+      phone() {
+        var str = this.from.phone;
+        if (/^1[3456789]\d{9}$/.test(str)) {
+          this.errphone = "";
+        } else {
+          this.errphone = "请输入正确的电话号码";
+        }
+      },
+
+      addFrom: function () {
+        var start = this.from.goHome;
+        var end = this.from.destination;
+        var nickname = this.from.name;
+        var weight = this.from.weight;
+        var contact = this.from.isMe;
+        var phone = this.from.phone;
+
+        var arrdata = {
+          start,
+          end,
+          nickname,
+          weight,
+          contact,
+          phone,
+        };
+
+        if (this.from.goHome.trim() !== "") {
+          if (this.from.destination.trim() !== "") {
+            if (this.from.name.trim() !== "") {
+              if (this.from.weight.trim() !== "") {
+                if (this.from.isMe.trim() !== "") {
+                  if (this.from.phone.trim() !== "") {
+                    this.$http
+                      .post("./index.php?c=offer&m=doAdd", arrdata, {
+                        emulateJSON: true,
+                      })
+                      .then(function (res) {
+                          console.log(res)
+                        var code = res.body["code"];
+                        if (code == 200) {
+                         
+                          alert(res.body["mess"]);
+                        }else{
+                          location.href = './index.php?c=login'
+                        }
+                      });
+                  } else {
+                    this.errphone = "请输入正确的电话号码";
+                  }
+                } else {
+                  this.errisMe = "请输入联系人,不能为空";
+                }
+              } else {
+                this.errweight = "请输入重量,不能为空";
+              }
+            } else {
+              this.errname = "请输入名称,不能为空";
+            }
+          } else {
+            this.errdestination = "请输入目的地,不能为空";
+          }
+        } else {
+          this.errmsghome = "请输入出发点,不能为空";
+        }
+      },
+    },
+  });
+</script>

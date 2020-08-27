@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>上海冠晖供应链管理有限公司--新闻动态</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./Resources/lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/publictop.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/introduce.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/home.css" />
+
+    <style>
+       .container-fluid{
+        padding: 0px;
+      }
+      body,html{
+        height: 100%;
+      }
+    </style>
+
+</head>
+<body>
+<div class="container-fluid" style="position: relative;height: auto;min-height: 100%;padding-bottom: 342px;">
+    <?php   include './View/index/top.html'  ?>
+        <div class="row" id="app">
+        <section class="col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
+            <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 intro_all">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <!--企业动态-->
+                        <div class="about_backpack" id="news_industry" >
+                            <p>您现在所在的位置: 新闻动态 > 企业动态</p>
+                            <div class="backpack_div" v-for="item in list" :key="item.news_mid">
+                                <p class="backpack_divhead">{{item.news_txt0}}</br>
+                                    <span class="news_time">{{item.news_dat0}}</span>
+                                </p>
+                                <div class="dynamic_journ" style="border-bottom: none;margin-top: 0px;">
+                                    <pre class="backpack_text" style="white-space: pre-wrap; overflow-wrap: break-word; border: none; background-color: rgb(255, 255, 255);" v-html="item.news_txt1"></pre>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 backpack_footimg">
+                                    </div>
+<!--                                    <div class="col-md-12 col-sm-12 col-xs-12 backpack_footimg" v-for="l1 in item.fileList">-->
+<!--                                        <img-->
+<!--                                                :src="l1.url"-->
+<!--                                                style="width: 100%; height: auto;"-->
+<!--                                                alt=""-->
+<!--                                        />-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer id="footer" style="position: absolute;bottom: 0; left: 0;width: 100%;">
+              <div class="col-md-12 col-sm-12 col-xs-12 bottom">
+                <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 bottom_div">
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <img
+                      src="./Resources/img/home/logo2.png"
+                      alt=""
+                      class="img-responsive"
+                      style="margin-left: 20px;margin-top:30px;"
+                    />
+                    <p>上海冠晖供应链科技有限公司</p>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <p class="bottom_head">友情链接</p>
+                    <p class="bottom_text">
+                      中通快递 <br />顺丰快递 <br />中国南方航空 <br />德邦物流
+                    </p>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <p class="bottom_head">我们的服务</p>
+                    <p class="bottom_text">公路运输 <br />铁路运输 <br />公铁联运 <br />仓储服务<br />供应链金融<br /></p>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-3">
+                    <p class="bottom_head">联系我们</p>
+                    <p class="bottom_text">
+                      座机: 021-52660210 <br />手机: 18621080292 <br />邮箱:
+                      guanhui_scm@126.com
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 bottom_foot">
+                  <p>
+                    沪公网安备11010502000501号| Copyright © 2006-2020 冠晖供应链
+                  </p>
+                </div>
+              </div>
+            </footer>
+        </section>
+    </div>
+</div>
+</body>
+<script src="./Resources/lib/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/lib/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/lib/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/js/home.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/js/dynamic.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/js/vue.js/vue.js"></script>
+  <script src="./Resources/js/vue.js/vue-resource.js"></script>
+<script >
+    window.onload = function(){
+      new Vue({
+        el: "#app",
+        data: {
+            list: []
+        },
+        created() {
+          this.getNewList();
+        },
+        methods: {
+          getNewList() {
+            var sendData = location.href.split('=')
+            var str = sendData[sendData.length -1]
+            this.$http.get('./index.php?c=news&m=newsDetail',{params:{ news_mid: str,
+              news_int0:2}},{emulateJSON:true}).then(function(res){
+                var str = []
+                if (res['body'].code === 200) {
+                  str.push(res['body'].newsData )
+                  this.list = str
+              }
+            })
+          },
+        },
+      });
+    }
+</script>
+</html>

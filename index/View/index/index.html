@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>上海冠晖供应链管理有限公司</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./Resources/lib/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./Resources/css/publictop.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/home.css" />
+    <link rel="stylesheet" href="./Resources/css/swiper.min.css" />
+  </head>
+  <style>
+    .swiper-pagination-bullet {
+      width: 9px;
+      height: 9px;
+      display: inline-block;
+      border-radius: 30px;
+      background: #fff;
+      opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+      /*opacity: 1;*/
+      background: #007aff;
+      /*background-attachment: fixed;*/
+      width: 9px;
+      transition-property: transform;
+      animation: load 5s linear infinite;
+    }
+    @-webkit-keyframes load {
+      0% {
+        background: #007aff;
+      }
+      100% {
+        background: #007aff;
+      }
+    }
+  </style>
+  <body>
+    <div class="container-fluid">
+      <?php include './View/index/top.html' ?>
+      <div class="row" >
+        <section class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 section_home">
+            <div class="swiper-container" id="swiperone">
+              <div class="swiper-wrapper" style="width: 100%; height: 100%;">
+                <div class="swiper-slide swiper-no-swiping">
+                  <img
+                    src="./Resources/img/home/banner.png"
+                    style="width: 100%; height: 100%;"
+                    class="swiper-lazy"
+                  />
+                </div>
+                <div class="swiper-slide swiper-no-swiping lazy-load">
+                  <img
+                    src="./Resources/img/home/banner2.png"
+                    style="width: 100%; height: 100%;"
+                    class="swiper-lazy"
+                  />
+                </div>
+                <div class="swiper-slide swiper-no-swiping lazy-load">
+                  <img
+                    src="./Resources/img/home/banner3.png"
+                    style="width: 100%; height: 100%;"
+                    class="swiper-lazy"
+                  />
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2">
+            <p class="col-md-12 col-sm-12 col-xs-12 all_p">
+              公铁联运
+            </p>
+            <div
+              class="col-md-12 col-sm-12 col-xs-12 service_div"
+              id="service_div"
+            >
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <img
+                  src="./Resources/img/home/公铁联运1.jpg"
+                  alt=""
+                  style="margin: 0 auto;left:0px;max-width:100%;height: auto;margin-bottom: 37px;"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12 journalism" id="app">
+            <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2">
+              <p class="col-md-12 col-sm-12 col-xs-12 all_p">新闻资讯</p>
+              <div class="col-md-12 col-sm-12 col-xs-12 all_div">
+                <div
+                  class="col-md-5 col-sm-5 col-xs-5"
+                  v-for="item in list"
+                  :key="item.news_mid"
+                >
+                  <a
+                    :href=" './index.php?c=index&m=industryTwo&code=industryTwo&id='+item.news_mid+'' "
+                    v-for="(l1,index) in item.fileList"
+                    :key="index"
+                  >
+                    <img
+                      :src="l1.url"
+                      alt=""
+                      id="img"
+                      class="img-responsive"
+                      style="width: 465px;height: 264px;"
+                    />
+                    <div class="journ_div">
+                      <p class="journ_onep">
+                        {{item.news_txt0}}
+                      </p>
+                      <p class="journ_twop" v-html="item.news_txt1"></p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-7 col-sm-7 col-xs-7">
+                  <div
+                    class="journ_list"
+                    v-for="item in banner"
+                    :key="item.news_mid"
+                  >
+                    <a
+                      :href=" './index.php?c=index&m=industryTwo&code=industryTwo&id='+item.news_mid+'' "
+                    >
+                      <span class="list_span">{{item.news_dat0}}</span>
+                      <div class="list_div">
+                        <p class="list_presshead">
+                          {{item.news_txt0}}
+                        </p>
+                        <p class="list_press" v-html="item.news_txt1"></p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 servecustomer">
+            <p class="col-md-12 col-sm-12 col-xs-12 all_p">客户服务</p>
+            <div class="col-md-12 col-sm-12 col-xs-12 all_div">
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <img
+                  src="./Resources/img/home/mengniu.png"
+                  alt=""
+                  class="img-responsive"
+                />
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <img
+                  src="./Resources/img/home/roadsnow.png"
+                  alt=""
+                  class="img-responsive"
+                />
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <img
+                  src="./Resources/img/home/KFC.png"
+                  alt=""
+                  class="img-responsive"
+                />
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <img
+                  src="./Resources/img/home/hope.png"
+                  alt=""
+                  class="img-responsive"
+                />
+              </div>
+            </div>
+          </div>
+          <?php include './View/index/footer.html' ?>
+        </section>
+      </div>
+    </div>
+  </body>
+  <script
+    src="./Resources/lib/jquery-3.3.1.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <script
+    src="./Resources/lib/bootstrap.min.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <script
+    src="./Resources/lib/swiper.min.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <script src="./Resources/js/home.js"></script>
+  <script src="./Resources/js/swiper.js"></script>
+  <script src="./Resources/js/vue.js/vue.js"></script>
+  <script src="./Resources/js/vue.js/vue-resource.js"></script>
+  <script>
+
+      new Vue({
+        el: "#app",
+        data: {
+          list: [],
+          banner: [],
+        },
+        created() {
+          this.getNewList();
+        },
+        methods: {
+          // 行业新闻  //url: "http://www.ghgylgl.com/index/index.php?c=news&m=getNewsList",
+          getNewList() {
+            var sendData = {
+              pageID: 1,
+              pageSize: 5
+            };
+
+            this.$http
+              .get(
+                "http://www.ghgylgl.com/index/index.php?c=news&m=getNewsList",
+                { params: sendData },
+                { emulateJSON: true }
+              )
+              .then(function (res) {
+                if (res["body"].code === 200) {
+                  this.list = res["body"].dataList.dataList.splice(0, 1);
+                  this.banner = res["body"].dataList.dataList.splice(0);
+                }
+              });
+          },
+        },
+      });
+
+
+  </script>
+</html>

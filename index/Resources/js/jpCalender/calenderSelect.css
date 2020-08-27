@@ -1,0 +1,152 @@
+/* CSS Document */
+
+.dirsCalender{
+	width:195px;
+}
+.dirsCalender .TL{
+	width:10px;
+	height:10px;
+	background:url(TL.png);
+}
+.dirsCalender .TC{
+	height:10px;
+	background:url(TC.png);
+}
+.dirsCalender .TR{
+	width:10px;
+	height:10px;
+	background:url(TR.png);
+	padding-left:0px;
+}
+
+.dirsCalender TD{
+	padding-left:0px;
+}
+
+.dirsCalender .CL{
+	width:10px;
+	height:10px;
+	background:url(CL.png);
+}
+.dirsCalender .CR{
+	width:10px;
+	height:10px;
+	background:url(CR.png);
+}
+.dirsCalender .FL{
+	width:10px;
+	height:10px;
+	background:url(FL.png);
+}
+.dirsCalender .FC{
+	height:10px;
+	background:url(FC.png);
+}
+.dirsCalender .FR{
+	width:10px;
+	height:10px;
+	background:url(FR.png);
+}
+
+
+.dirsCalender .next{
+	/*background:url(/images/calendar-next.gif);*/
+	/*color:#000099;*/
+	font-weight:bold
+	width:25px;
+	height:11px;
+	right:1px;
+	cursor:pointer;
+}
+.dirsCalender .next:hover {
+	/*background-position:0 11px;*/
+}
+.dirsCalender .back {
+	/*background:url(/images/calendar-back.gif);*/
+	/*color:#000099;*/
+	font-weight:bold
+	width:25px;
+	height:11px;
+	right:1px;
+	cursor:pointer;
+}
+.dirsCalender .back:hover {
+	/*background-position:0 11px;*/
+}
+
+.dirsCalender .dayCell {
+	text-align:center;
+	/*color:#000000;*/
+}
+.dirsCalender .dayCelltd {
+	/*color:#FF0000;*/
+	font-weight:bold
+}
+.dirsCalender .dayCellof {
+	color:#999999;
+}
+
+clearLeft{
+	clear:left;
+}
+
+.dirsCalenderForm{
+	/*width:380px;*/
+	font-size:10px;
+	/*background-color:#cccccc;*/
+	text-align:center;
+	background-color:#FFFFFF;
+}
+
+.dirsCalenderForm td{
+	padding-left:0px;
+}
+
+.dirsCalenderForm .titlebar{
+	height:25px;
+	font-size:14px;
+}
+.dirsCalenderForm .subTitlebarOn{
+	width:20px;
+	font-size:10px;
+	text-align:center;
+}
+.dirsCalenderForm .subTitlebarOf{
+	width:25px;
+	font-size:10px;
+	text-align:center;
+}
+.dirsCalenderForm .subTitlebarOnRed{
+	width:25px;
+	color:#FF0000;
+	font-size:10px;
+	text-align:center;
+	cursor:pointer;
+}
+.dirsCalenderForm .subTitlebarOnBlu{
+	width:25px;
+	color:#0000FF;
+	font-size:10px;
+	text-align:center;
+	cursor:pointer;
+}
+.dirsCalenderForm .dayFrame{
+	width:25px;
+	/*background-color:#FFFFFF;*/
+	font-size:8px;
+	vertical-align:top;
+	text-align:center;
+	cursor:pointer;
+}
+
+
+.dirsCalenderForm .dayFrameN{
+	height:16px
+	font-size:10px;
+	text-align:center;
+}
+.dirsCalenderForm .dayFrameB{
+	height:16px
+	/*background-image: url(/images/subTitlebarOn2.png);*/
+	font-size:10px;
+}

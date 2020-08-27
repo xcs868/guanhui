@@ -1,0 +1,67 @@
+<div class="row">
+    <header>
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid" style="width: 1200px;">
+                <div class="navbar-header" style="position: relative;left: -20px;">
+                    <a  href="./index.php?c=index" style="cursor: pointer;"><img  src="./Resources/img/home/logo.png" class="logoimg" style=""></a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-left navbar-form" id="nav_li">
+                    <ul class="nav navbar-nav" id="navbar-nav" num=1>
+                        <li>
+                            <a href="./index.php?c=index" class="dropdown-toggle navbar_li" >首页</a>
+                        </li>
+
+                        <li class="">
+                            <a href="./index.php?c=index#homeservice" class="dropdown-toggle navbar_li">公司介绍</a>
+                        </li>
+                        <li class="">
+                            <a href="./index.php?c=index#product"  class="dropdown-toggle navbar_li">产品介绍</a>
+                        </li>
+                        <li class="">
+                            <a href="./index.php?c=index#railway"  class="dropdown-toggle navbar_li">铁路知识</a>
+                        </li>
+                        <li class="">
+                            <a href="./index.php?c=index#network" class="dropdown-toggle navbar_li">网络分布</a>
+                        </li>
+                        <li class="">
+                            <a href="./index.php?c=index#enterprise" class="dropdown-toggle navbar_li">企业文化</a>
+                        </li>
+                        <li class="">
+                            <a href="./index.php?c=index#company" class="dropdown-toggle navbar_li">服务案例</a>
+                        </li>
+                        <li class="">
+                            <a href="./index.php?c=offer" class="dropdown-toggle navbar_li">产品报价</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <?php if (empty($_SESSION['admin'])): ?>
+                    <ul class="nav navbar-nav navbar-right  navbar-form dz">
+                        <li style="width:70px"><a href="./index.php?c=login">登录</a></li>
+                        <li style="position: relative;top: 14px;color:#fff;">|</li>
+                        <li style="width:70px"><a href="#">注册</a></li>
+                    </ul>
+                <?php endif ?>
+
+
+                <?php if (!empty($_SESSION['admin'])): ?>
+                <ul class="nav navbar-nav navbar-right  navbar-form dz">
+                    <li
+                            style="width:70px"><a
+                            href="#"><?php echo $_SESSION['admin']['nickname'] ?></a></li>
+                    <li style="position: relative;top: 14px;color:#fff;">|</li>
+                    <li style="width:70px"><a href="./index.php?c=login&m=doDrop">登出</a></li>
+                </ul>
+                <?php endif ?>
+
+            </div>
+        </nav>
+    </header>
+
+</div>

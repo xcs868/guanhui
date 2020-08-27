@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>上海冠晖供应链管理有限公司--关于冠晖</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./Resources/lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/publictop.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/customer.css" />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/home.css" />
+
+</head>
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<body>
+<div class="container-fluid">
+    <?php   include './View/index/top.html'  ?>
+    <div class="row">
+        <section class="col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
+            <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 intro_all">
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <div class="about_left">
+                        <p>客户服务</p>
+                        <ul>
+                            <li class="addactive" id="commonsense" onclick="showhide('commonsense')">公铁联运</li>
+<!--                            <li  id="culture" onclick="showhide('priceinquiry')">价格查询</li>-->
+                            <li id="branch"  onclick="showhide('priceinquirymessage')">客户留言</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-10 col-sm-10 col-xs-10 about_padding">
+                    <!--铁路常识-->
+                    <div class="about_backpack" id="about_backpack">
+                        <p>您现在所在的位置: 客户服务 > 公铁联运</p>
+                        <div class="backpack_div mt50">
+                            <!-- <p class="backpack_divhead">优劣势比较</p> -->
+                            <div>
+                                <p class="backpack_text1">如果你在为公路运输的路况、安全而纠结，<br>如果你在为航空运输的成本、运量而烦恼，<br>是时候考虑铁路运输了! 因为铁路运输有以下优势:</p>
+
+                                <p class="backpackbg_head">一、铁路运输优势</p>
+                                <p class="backpack_text">1、运费低廉、 较公路成本低<br>2、载运量大、适合规模运输<br>3、运输准确、铁路计划性强<br>4、安全稳定、不受气候影响<br>5、高度连续、保障全年运行</p>
+                                <p class="backpackbg_head">二、铁路运输VS公路运输</p>
+                                <div class="col-md-6 col-sm-6 col-xs-6 backpack_footimg">
+                                    <img src="./Resources/img/home/20200605154644.png" alt="" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--价格查询-->
+                    <div class="about_backpack"  id="historyquery">
+                        <p>您现在所在的位置: 客户服务 > 价格查询</p>
+                        <div class="backpack_div">
+                            <p class="backpack_divhead">一、产品报价</p>
+                            <?php   include './View/offer/add.html'  ?>
+
+                            <p class="backpack_divhead">二、历史查询</p>
+                            <?php   include './View/offer/offerList.html'  ?>
+                        </div>
+                    </div>
+                    <!--客户留言-->
+                    <div class="about_backpack" id="message">
+                        <p>您现在所在的位置: 客户服务 > 客户留言</p>
+                        <div class="backpack_div mt50">
+                            <!-- <p class="backpack_divhead">客户留言</p> -->
+                            <div  class="col-md-12 col-sm-12 col-xs-12">
+                                <p class="backpack_text">
+                                    <form name="my_form" method="POST">
+                                        <textarea id="BZ" name="BZ" rows="10" style="width: 100%;resize: none;" οnkeydοwn="checkMaxInput(this,80)" οnkeyup="checkMaxInput(this,80)" οnfοcus="checkMaxInput(this,80)" οnblur="checkMaxInput(this,80);resetMaxmsg()"></textarea>
+                                        <span id="size"><span id="numberSize">0</span>/500字</span>   
+                                    </form>
+                                </p>
+                                <p id="module" style="height: 30px;line-height: 30px; color: red;" ></p>
+                                <div class="box" id="userAddMessage" style="margin-bottom:20px">
+                                    提交
+                                </div>             
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <?php   include './View/index/footer.html'  ?>
+        </section>
+    </div>
+</div>
+</body>
+<script src="./Resources/lib/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/lib/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/lib/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/js/home.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Resources/js/customer.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //多行文本输入框剩余字数计算
+    function checkMaxInput(obj, maxLen) {
+        if (obj == null || obj == undefined || obj == "") {
+            return;
+        }
+        if (maxLen == null || maxLen == undefined || maxLen == "") {
+            maxLen = 100;
+        }
+
+        var strResult;
+        var $obj = $(obj);
+        var newid = $obj.attr("id") + 'msg';
+
+        if (obj.value.length > maxLen) { //如果输入的字数超过了限制
+            obj.value = obj.value.substring(0, maxLen); //就去掉多余的字
+            strResult = '<span id="' + newid + '" class=\'Max_msg\' ><br/>剩(' + (maxLen - obj.value.length) + ')字</span>'; //计算并显示剩余字数
+        }
+        else {
+            strResult = '<span id="' + newid + '" class=\'Max_msg\' ><br/>剩(' + (maxLen - obj.value.length) + ')字</span>'; //计算并显示剩余字数
+        }
+
+        var $msg = $("#" + newid);
+        if ($msg.length == 0) {
+            $obj.after(strResult);
+        }
+        else {
+            $msg.html(strResult);
+        }
+    }
+
+    //清空剩除字数提醒信息
+    function resetMaxmsg() {
+        $("span.Max_msg").remove();
+    }
+</script>
+</html>

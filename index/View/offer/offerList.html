@@ -1,0 +1,104 @@
+<div class="col-md-12 col-xs-12" id="offer_list">
+  <div class="col-md-12 col-xs-12">
+    <div class="col-md-12 col-xs-12" style="margin-bottom: 20px;">
+      <table class="table table-responsive">
+        <tr
+          style="
+            text-align: center;
+            background: #f9f9f9;
+            font-weight: 500;
+            border: 1px solid #cacaca;
+            box-sizing: border-box;
+            border-bottom: none;
+            font-size: 16px;
+            color: #333;
+          "
+        >
+          <td style="height: 2rem; width: 5%;">序号</td>
+          <td style="height: 2rem; width: 22.5%;">出发地</td>
+          <td style="height: 2rem; width: 18.9%;">目的地</td>
+          <td style="height: 2rem; width: 16.6%;">名称</td>
+          <td style="height: 2rem; width: 10%;">重量(KG)</td>
+          <td style="height: 2rem; width: 9.7%;">联系人</td>
+          <td style="height: 2rem;">电话</td>
+        </tr>
+      </table>
+      <div
+        id="scolldiv"
+        :class="{ dpnone:isAll}"
+        class="waydiv_scroll"
+        style="
+          border: 1px solid #ddd;
+          box-sizing: border-box;
+          border-top: none;
+        "
+        ref="div"
+      >
+        <table class="table table-responsive" id="table_div">
+          <tr style="text-align: center;" v-for="(item,i) in items">
+            <td v-cloak style="height: 50px; width: 5%;">{{ item.mid }}</td>
+            <td v-cloak style="height: 50px; width: 22.5%;">
+              {{ item.off_vch0 }}
+            </td>
+            <td v-cloak style="height: 50px; width: 19%;">
+              {{ item.off_vch1 }}
+            </td>
+            <td v-cloak style="height: 50px; width: 16.5%;">
+              {{ item.off_vch2 }}
+            </td>
+            <td v-cloak style="height: 50px; width: 10%;">
+              {{ item.off_int0 }}
+            </td>
+            <td v-cloak style="height: 50px; width: 9.7%;">
+              {{ item.off_vch3 }}
+            </td>
+
+            <td v-cloak style="height: 50px;">{{ item.off_vch4 }}</td>
+          </tr>
+        </table>
+      </div>
+      <div id="scolldiv2" class="waydiv_scroll" :class="{ dpnone : isAlls }">
+        <img src="./Resources/img/home/暂无报价.png" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  new Vue({
+    el: "#offer_list",
+    data: {
+      items: [],
+      itemsLength: "",
+      isAlls: false,
+      isAll: true,
+    },
+    created() {
+      this.searchData();
+    },
+   
+    methods: {
+      searchData() {
+        this.$http
+          .post("./index.php?c=offer&m=searchData", {}, { emulateJSON: true })
+          .then((res) => {
+            if (res.body["code"] === 200) {
+              this.items = res.body["rows"];
+              this.itemsLength = res.body["rows"].length;
+              console.log(this.items);
+              var code = localStorage.getItem("code");
+              if (code === "200" && this.itemsLength == 0) {
+               
+                this.isAll = true;
+                this.isAlls = false;
+              } else if (code === "200") {
+               
+                this.isAll = false;
+                this.isAlls = true;
+              }
+            }
+          });
+      },
+    },
+  });
+</script>

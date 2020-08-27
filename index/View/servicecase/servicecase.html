@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>上海冠晖供应链管理有限公司--关于冠晖</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./Resources/lib/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./Resources/css/publictop.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./Resources/css/customer.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./Resources/css/home.css" />
+  </head>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+  <body>
+    <div id="app" class="container-fluid">
+      <?php   include './View/index/top.html'  ?>
+      <div class="row">
+        <section
+          class="col-md-12 col-sm-12 col-xs-12"
+          style="background-color: #fff;"
+        >
+          <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 intro_all">
+            <div class="col-md-2 col-sm-2 col-xs-2">
+              <div class="about_left">
+                <p>服务案例</p>
+                <ul>
+                  <li class="addactive" id="introduc">
+                    服务案例
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-10 about_padding">
+              <!--服务案例-->
+              <div class="about_backpack" id="about_backpack">
+                <p>您现在所在的位置: 服务案例 > 服务案例</p>
+
+
+
+                <div class="backpack_div mt50">
+
+                  <div
+                          class="dynamic_journ"
+                          v-for="(item,index) in list"
+                          :key="item.ser_mid"
+                  >
+                  <!-- <p class="backpack_divhead">服务案例</p> -->
+                  <div>
+                    <div
+                      class="col-md-12 col-sm-12 col-xs-12 backpack_footimg"
+                      style="padding-top: 0px;"
+                    >
+                      <p
+                        class="backpackbg_head firstP"
+                        style="padding-top: 0px;"
+                        id="p"
+                      >
+                        {{index + 1 }}、{{ item.ser_txt0 }}
+
+                      </p>
+<!--                      <p class="backpack_text" id="text"></p>-->
+                      <pre class="backpack_text" style="white-space: pre-wrap; overflow-wrap: break-word; border: none; background-color: rgb(255, 255, 255);" v-html="item.ser_txt1"></pre>
+
+                      <div class="col-md-12 col-sm-12 col-xs-12 backpack_footimg">
+                      </div>
+<!--                        v-for="l1 in item.fileList"  id="div">-->
+<!--                        <img-->
+<!--                                :src="l1.url"-->
+<!--                                style="width: 890px; height: 329px;"-->
+<!--                                alt=""-->
+<!--                        />-->
+<!--                        <img-->
+
+<!--                          src="./Resources/img/servicecase/202006090915398389.png"-->
+<!--                          alt=""-->
+<!--                        />-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </section>
+        <?php   include './View/index/footer.html'  ?>
+      </div>
+    </div>
+  </body>
+  <script
+    src="./Resources/lib/jquery-3.3.1.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <script
+    src="./Resources/lib/bootstrap.min.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <script type="text/javascript" src="./Resources/js/home.js"></script>
+  <script src="./Resources/js/vue.js/vue.js"></script>
+  <script src="./Resources/js/vue.js/vue-resource.js"></script>
+  <script>
+
+    new Vue({
+      el: "#app",
+      data: {
+        list: []
+      },
+      created() {
+        this.getNewList();
+      },
+      methods: {
+        getNewList() {
+          // this.$http.get('http://localhost/guanhui/guanhui/index/index.php?c=ser&m=getNewsList',{emulateJSON:true}).then(function(res){
+          this.$http.get('http://www.ghgylgl.com/index/index.php?c=ser&m=getNewsList',{emulateJSON:true}).then(function(res){
+            console.log(res);
+            if (res.body.code === 200) {
+              this.list = res.body.dataList;
+              console.log(this.list)
+            }
+          })
+        },
+      },
+    });
+  </script>
+</html>

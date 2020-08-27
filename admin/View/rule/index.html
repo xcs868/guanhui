@@ -1,0 +1,232 @@
+<?php  include './View/index/import.html' ?>
+<body>
+<div class="x-body">
+    <xblock>
+        <div class="layui-input-inline">
+            <input type="text" id="rulename" name="rulename"  placeholder="权限名称" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width:80px">
+            <button class="layui-btn"
+                    onclick="rule_list_home.rule_add('添加权限','./index.php?c=rule&m=add','600','500')"
+                    lay-filter="*"><i class="layui-icon">&#xe608;</i>添加</button>
+        </div>
+
+    </xblock>
+   
+
+    <table id="rule_list_home"   class="table table-responsive" style="background: white;text-align:center;" >
+        <tr style="background: #E5E7EA;border: 0px solid #DCDFE6;font-weight: 600;">
+            <th style="height:2rem;line-height:2rem;"> ID </th>
+            <th style="height:2rem;line-height:2rem;"> 权限名称 </th>
+            <th style="height:2rem;line-height:2rem;"> 控制器 </th>
+            <th style="height:2rem;line-height:2rem;"> 方法 </th>
+            <th style="height:2rem;line-height:2rem;"> 创建时间 </th>
+            <th style="height:2rem;line-height:2rem;"> 状态 </th>
+            <th style="height:2rem;line-height:2rem;"> 操作 </th>
+        </tr>
+        <tr v-for="(item,i) in items" class="vue_reflash">
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-cloak>{{ item.rule_mid }}</td>
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-cloak>{{ item.rule_vch0 }}</td>
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-cloak>{{ item.rule_vch1 }}</td>
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-cloak>{{ item.rule_vch2 }}</td>
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-cloak>{{ item.rule_dat0 }}</td>
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-bind:id="item.rule_int0" v-cloak v-if="item.rule_int0 == 1">激活</td>
+            <td style="height:2rem;line-height:2rem;border: 1px solid #eceef3;" v-bind:id="item.rule_int0" style="" v-cloak v-else="item.rule_int0 == 2">禁用 </td>
+            <td style="border: 1px solid #eceef3;">
+                <div class="main_order" title="修改" data-toggle="modal"
+                     @click="rule_save('修改权限','./index.php?c=rule&m=edit','600','500',item.rule_mid);"></div>
+            </td>
+        </tr>
+
+        <tr id="page_die" style="position:relative;margin-bottom:10px">
+            <td colspan="10" style="text-align:right;">
+                <nav id="nna">
+                    <ul class="pagination">
+                        <li id="left_to" class="disabled" @click="searchData(backs.pages)"v-for="backs in backTo">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li id="home_page" class="disabled" @click="searchData(1)">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">首页</span>
+                            </a>
+                        </li>
+                        <li v-bind:title="page.pages" @click="searchData(page.pages)"
+                            :class="[activePage==page.pages ? 'active' : 'title']"  v-for="page in pages">
+
+
+                            <a href="#page.pages">{{page.pages}}<span class="sr-only"></span></a>
+                        </li>
+                        <li id="tail_page" @click="searchData(tails.pages)" v-for="tails in tailTo" v-cloak>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">尾页</span>
+                            </a>
+                        </li>
+                        <li id="right_to">
+                            <a href="#" aria-label="Previous"
+                               @click="searchData(nexts.pages)" v-for="nexts in nextTo">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </td>
+        </tr>
+        <div id="base_img0">
+            <img src="./Resources/images/icon/temporarily.png" alt=""style="width: 456px;height:317px;position:absolute;left:50%;margin-left:-228px;margin-top:7rem;">
+        </div>
+    </table>
+
+</div>
+
+<script>
+    rule_list_home = new Vue({
+        el: '#rule_list_home',
+        data: {
+            parentMessage: 'Parent',
+            items: [],
+            pages:[],
+            nextTo:[],
+            backTo:[],
+            tailTo:[],
+            activePage:1,
+            rows:10
+        },
+        mounted:function(){
+            this.searchData(1);
+        },
+        methods:{
+            // 查询便利
+            searchData:function (page) {
+                // 获取提交的页码
+                var rows = 10;
+                var username = $('#rulename').val();
+                $(".pagination li").attr('class',"title");  // 清空属性
+                if(page <= 3){
+                    $('#home_page').hide();
+                }
+                rule_list_home.activePage = page;
+                // 表单提交的数据
+                var from_tb = $('form').serializeArray();
+                from_tb['0'] = {name:'username',value:username};
+                from_tb['1'] = {name:'page',value:page};
+                from_tb['2'] = {name:'rows',value:rows};
+                this.$http.post('./index.php?c=rule&m=getData',from_tb,{emulateJSON:true}).then(function(res){
+                    var pages =  res.body["page"];  // 此处是查询的页码
+                    var ver_pages = Math.ceil(parseInt(res.body.total)/rows);    // 总共分多少页
+                    this.pageNum(pages,ver_pages);
+                    if(res.body["rows"] == ""){
+                        $('#page_die').hide();
+                        $("#base_img0").show();
+                    }else{
+                        $('#page_die').show();
+                        $("#base_img0").hide();
+                    }
+
+                    rule_list_home.items = res.body["rows"];
+                    $('#total').val(res.body["total"]);
+                });
+
+            },
+
+            pageNum:function(page,ver_pages){
+                rule_list_home.pages = [];
+                var rows = 10;
+                var rightNumb = (parseInt(ver_pages)-parseInt(page));
+                var leftNumb = parseInt(page) - 3;
+                var backTo = (parseInt(page) - parseInt(1))?(parseInt(page) - parseInt(1)):1;
+                var nextTo = (parseInt(page) + parseInt(1)) < ver_pages?(parseInt(page) + parseInt(1)):ver_pages;
+
+                if(page <= 1){
+                    rule_list_home.backTo['0'] = {'pages':1,'rows':rows}; // 上翻页
+                }else{
+                    rule_list_home.backTo['0'] = {'pages':backTo,'rows':rows}; // 上翻页
+                }
+
+                if(page >= ver_pages){
+                    rule_list_home.nextTo['0'] = {'pages':ver_pages,'rows':rows}; // 上翻页
+                }else{
+                    rule_list_home.nextTo['0'] = {'pages':nextTo,'rows':rows}; // 下翻页
+                }
+
+                // 首尾页展示问题
+                if(page <= 3){
+                    $('#home_page').hide();
+                }else{
+                    $('#home_page').show();
+                }
+                if(ver_pages == page){
+                    $('#tail_page').hide();
+                }else{
+                    $('#tail_page').show();
+                }
+                if(ver_pages == page){
+                    $("#right_to").attr('class',"disabled");
+                }else{
+                    $("#right_to").attr('class',"title");
+                }
+                if(page ==1){
+                    $("#left_to").attr('class',"disabled");
+                }else{
+                    $("#left_to").attr('class',"title");
+                }
+                // 展示页码数
+                if(ver_pages >=5){
+                    if(rightNumb> 2 && leftNumb > 0){
+                        for (var i = 0; i < 5; i++){
+                            rule_list_home.pages[i] = {'pages':++leftNumb,'rows':rows};
+                        }
+                        rule_list_home.tailTo['0'] = {'pages':ver_pages,'rows':rows};
+                    }
+                    if(leftNumb <= 0){
+                        for (var i = 0; i < 5; i++){
+                            rule_list_home.pages[i] = {'pages':i+1,'rows':rows};
+                        }
+                        rule_list_home.tailTo['0'] = {'pages':ver_pages,'rows':rows};
+                    }
+                    if(rightNumb <= 2){
+                        var startNumb = parseInt(ver_pages) - 5;
+                        for (var i = 0; i < 5; i++){
+                            rule_list_home.pages[i] = {'pages':++startNumb,'rows':rows};
+                        }
+                    }
+
+                }else{
+                    for (var i = 0; i < ver_pages; i++){
+                        rule_list_home.pages[i] = {'pages':i+1,'rows':rows};
+                    }
+                }
+            },
+
+            rule_add:function (title,url,w,h) {
+                layui.use(['laydate','element','laypage','layer'], function(){
+                    $ = layui.jquery;
+                    laydate = layui.laydate;//日期插件
+                    lement = layui.element();//面包导航
+                    laypage = layui.laypage;//分页
+                    layer = layui.layer;//弹出层
+
+                    x_admin_show(title,url,w,h);
+                });
+            },
+            rule_save:function (title,url,w,h,rule_mid) {
+                console.log(rule_mid);
+                var url = url+"&rule_mid="+rule_mid;
+                layui.use(['laydate','element','laypage','layer'], function(){
+                    $ = layui.jquery;
+                    laydate = layui.laydate;//日期插件
+                    lement = layui.element();//面包导航
+                    laypage = layui.laypage;//分页
+                    layer = layui.layer;//弹出层
+
+                    x_admin_show(title,url,w,h);
+                });
+            }
+
+
+        }
+    });
+</script>
+
+</body>

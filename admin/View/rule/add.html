@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="./Resources/css/x-admin.css" media="all">
+<script src="./Resources/js/vue.js/vue.js"></script>
+<script src="./Resources/js/vue.js/vue-resource.js"></script>
+<script src="./Resources/js/jquery.min.js"></script>
+<script src="./Resources/js/bootstrap.min.js"></script>
+<script src="./Resources/lib/layui/layui.js" charset="utf-8"></script>
+<script src="./Resources/js/x-layui.js" charset="utf-8"></script>
+
+<div class="x-body">
+    <form class="rule_list_add" id="rule_list_add">
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>权限名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="username" name="username" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>权限名称
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>控制器
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="controller" name="controller" required="" lay-verify="controller"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>控制器
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>方法
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="methods" name="methods"  lay-verify="methods"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>方法
+            </div>
+        </div>
+        <div class="layui-form-item" onclick="rule_list_add.addData();">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <button  class="layui-btn" lay-filter="add" lay-submit="">
+                增加
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    rule_list_add = new Vue({
+        el: '#rule_list_add',
+        data: {
+            parentMessage: 'Parent',
+            items: [],
+        },
+        methods:{
+            addData:function () {
+                var from_tb = $('form').serializeArray();
+                this.$http.post('./index.php?c=rule&m=doAdd',from_tb,{emulateJSON:true}).then(function(res){
+                    var row =  res.body.code;  // 此处是查询的页码
+
+                    alert(res.body.mess);
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+
+                });
+            }
+        }
+    });
+</script>

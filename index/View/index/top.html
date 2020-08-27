@@ -1,0 +1,97 @@
+<div class="row">
+    <header>
+        <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2  header_logo">
+
+        </div>
+        <nav class="navbar navbar-fixed-top">
+            <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2  header_logo">
+                <a  href="./index.php?c=index" style="cursor: pointer;"><img  src="./Resources/img/home/logo.png" class="logoimg" style=""></a>
+                <div class="header_phone">
+                    <img src="./Resources/img/home/telephone.png" alt="" class="">
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12  header_navbar">
+                <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2">
+
+                    <div class="navbar-header" style="position: relative;left: -20px;">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-left navbar-form" id="nav_li">
+                        <ul class="nav navbar-nav" id="navbar-nav" num=1>
+                            <li class="home color">
+                                <a href="./index.php?c=index" class="dropdown-toggle navbar_li" id="guan_home">首页</a>
+                            </li>
+
+                            <li class="home">
+                                <a href="./index.php?c=index&m=aboutGuanHui" class="dropdown-toggle navbar_li" id="abouot_guan">关于冠晖</a>
+                                <ul class="navbar_ul">
+                                    <span></span>
+                                    <li><a href="./index.php?c=index&m=aboutGuanHui&code=introduc">企业简介</a></li>
+                                    <li><a href="./index.php?c=index&m=aboutGuanHui&code=culture" >企业文化</a></li>
+                                    <li><a href="./index.php?c=index&m=aboutGuanHui&code=branch"  >网点分布</a></li>
+                                    <li><a href="./index.php?c=index&m=aboutGuanHui&code=backpack">背包简介</a></li>
+                                </ul>
+                            </li>
+                            <li class="home">
+                                <a href="./index.php?c=index&m=newtrend"  class="dropdown-toggle navbar_li">新闻资讯</a>
+                                <ul class="navbar_ul">
+                                    <span></span>
+                                    <li><a href="./index.php?c=index&m=newtrend&code=industry">行业新闻</a></li>
+                                    <li><a href="./index.php?c=index&m=newtrend&code=dynamic">企业动态</a></li>
+                                </ul>
+                            </li>
+                            <li class="home">
+                                <a href="./index.php?c=index&m=customer"  class="dropdown-toggle navbar_li">客户服务</a>
+                                <ul class="navbar_ul">
+                                    <span></span>
+                                    <li><a href="./index.php?c=index&m=customer&code=commonsense">公铁联运</a></li>
+<!--                                    <li><a href="./index.php?c=index&m=customer&code=priceinquiry">价格查询</a></li>-->
+                                    <li><a href="./index.php?c=index&m=customer&code=priceinquirymessage">客户留言</a></li>
+                                </ul>
+                            </li>
+                            <li class="home">
+                                <a href="./index.php?c=index&m=servicecase" class="dropdown-toggle navbar_li">服务案例</a>
+                            </li>
+                            <li class="home">
+                                <a href="./index.php?c=index&m=contactus" class="dropdown-toggle navbar_li">联系我们</a>
+                                <ul class="navbar_ul">
+                                    <span></span>
+                                    <li><a href="./index.php?c=index&m=contactus&code=map">总部地址</a></li>
+                                    <li><a href="./index.php?c=index&m=contactus&code=name">各片区联系人</a></li>
+                                    <li><a href="./index.php?c=index&m=contactus&code=my">人才招聘</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <?php if (empty($_SESSION['admin'])): ?>
+                    <ul class="nav navbar-nav navbar-right  navbar-form dz">
+                        <li><a href="./index.php?c=login">登录</a></li>
+                        <li style="position: relative;top: 22px;color:#fff;">|</li>
+                        <li><a href="./index.php?c=login&m=regist">注册</a></li>
+                    </ul>
+                    <?php endif ?>
+
+
+                    <?php if (!empty($_SESSION['admin'])): ?>
+                    <ul class="nav navbar-nav navbar-right  navbar-form dz">
+                        <li
+                                style="width:70px"><a
+                                href="#"><?php echo $_SESSION['admin']['nickname'] ?></a></li>
+                        <li style="position: relative;top: 22px;color:#fff;">|</li>
+                   
+                        <li style="width:70px"><a href="#" id="loginout">登出</a></li>
+                    </ul>
+                    <?php endif ?>
+
+                </div>
+            </div>
+
+        </nav>
+    </header>
+</div>
